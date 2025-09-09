@@ -16,12 +16,13 @@ import base64
 def createWindow():
     options = Options()  
     # Set window size
-    options.add_argument("window-size=1900x1400")
+    options.add_argument("--headless")
+    options.page_load_strategy = "eager"
     
     # Add uBlock Origin Lite extension
     #options.add_extension("/path/to/ublock-origin-lite.crx")  
     # Create WebDriver instance
-    driver = webdriver.Chrome()#options=options
+    driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(25)
     
     return driver
@@ -202,6 +203,11 @@ def get_comments(driver, postid):
         com_id = com.find_element(By.XPATH, "./ancestor::div[contains(@class, 'com')]")
         com_id = com_id.get_attribute("id")
         com_id = com_id.strip("com")
+        #get user
+        try: 
+            com_user = com.find_element(By.CLASS_NAME, "c-title")[0].text.split()[0]
+        except:
+            com_user = ""
         #get perm level
         if com.find_elements(By.CLASS_NAME, "c-mod-5"):
             com_user_perm = "global-mod"
@@ -847,3 +853,4 @@ class PostTextAmountError(Exception):
 class StreamNotFoundError(Exception):
     def __init__(self, message="Selected stream was not found in list. Try following it."):
         super().__init__(message)
+

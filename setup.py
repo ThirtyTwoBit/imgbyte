@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='imgbyte',
-    version='0.1.1',
+    version='0.1.2',
     author='32-Bit',
     description='Automation library for interacting with Imgflip using Selenium and Requests',
     long_description=open('README.md').read(),

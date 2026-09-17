@@ -1,4 +1,4 @@
-name: Upload Python Package to PyPI
+name: Various bug fixes
 
 on:
   release:

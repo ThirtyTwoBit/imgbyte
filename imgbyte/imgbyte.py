@@ -149,7 +149,7 @@ def get_notif_count(driver):
     return int(respInfo['user']['nots'])
 
 class Notification:
-    def __init__(self, postid, com_id):
+    def __init__(self, post_id, com_id):
         self.post_id = post_id
         self.com_id = com_id
   
@@ -202,10 +202,10 @@ def get_comments(driver, postid):
         #get comment id
         com_id = com.find_element(By.XPATH, "./ancestor::div[contains(@class, 'com')]")
         com_id = com_id.get_attribute("id")
-        com_id = com_id.strip("com")
+        com_id = com_id.removeprefix("com")
         #get user
         try: 
-            com_user = com.find_element(By.CLASS_NAME, "c-title")[0].text.split()[0]
+            com_user = com.find_element(By.CLASS_NAME, "c-title").text.split()[0]
         except:
             com_user = ""
         #get perm level
